@@ -1,0 +1,23 @@
+name: My-First-CI-Engine  # 你的流水线名字
+
+on: [push]                # 只要你一 push 代码，圆圈就开转
+
+jobs:
+  build-and-test:         # 一个叫“构建与测试”的任务
+    runs-on: ubuntu-latest # 重点！这就是你问的“别的机器”（Runner）
+
+    steps:                # 下面是这台机器要做的具体动作
+      - name: 1. 拉取代码
+        uses: actions/checkout@v4  # 把你的代码下载到这台临时机器上
+
+      - name: 2. 模拟环境检查
+        run: |
+          echo "正在检查运行环境..."
+          node -v
+          npm -v
+
+      - name: 3. 执行自动化测试
+        run: |
+          echo "开始运行单元测试..."
+          echo "测试通过率 100%！"
+          # 这里如果运行一条不存在的命令，圆圈就会变红
